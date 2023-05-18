@@ -29,7 +29,8 @@ func CompleteApps(
 	// We can't use `flag.*` here because of import cycles. *sigh*
 	orgFlag := cmd.Flag("org")
 	if orgFlag != nil && orgFlag.Changed {
-		org, err := clientApi.GetOrganizationBySlug(ctx, orgFlag.Value.String())
+		var org *api.Organization
+		org, err = clientApi.GetOrganizationBySlug(ctx, orgFlag.Value.String())
 		if err != nil {
 			return nil, err
 		}
